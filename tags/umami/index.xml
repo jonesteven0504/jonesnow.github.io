@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>umami on Jone Snow</title><link>https://jonesnow.github.io/tags/umami/</link><description>Recent content in umami on Jone Snow</description><generator>Hugo -- gohugo.io</generator><language>zh</language><managingEditor>iguangzhengli@gmail.com (Guangzheng Li)</managingEditor><webMaster>iguangzhengli@gmail.com (Guangzheng Li)</webMaster><copyright>2023 GuangzhengLi All rights reserved</copyright><lastBuildDate>Sun, 14 Aug 2022 21:34:36 +0800</lastBuildDate><atom:link href="https://jonesnow.github.io/tags/umami/index.xml" rel="self" type="application/rss+xml"/><item><title>How to integrate umami to your website for free</title><link>https://jonesnow.github.io/blog/how-to-integrate-umami-for-free-to-blog-site/</link><pubDate>Sun, 14 Aug 2022 21:34:36 +0800</pubDate><author>iguangzhengli@gmail.com (Guangzheng Li)</author><guid>https://jonesnow.github.io/blog/how-to-integrate-umami-for-free-to-blog-site/</guid><description>&lt;p>This article is about how to integrate &lt;a href="https://umami.is/">umami&lt;/a> website analytics to your website for free. The database use &lt;a href="https://supabase.com/docs/guides/database">postgres&lt;/a> with 500M storage limit provided by &lt;a href="https://app.supabase.com/">supabase&lt;/a>.&lt;/p>
+&lt;p>The &lt;a href="https://umami.is/">umami&lt;/a> service is hosted with &lt;a href="https://vercel.com/">vercel&lt;/a>. Thanks to the excellent service capabilities of cloud vendors, you can integrate &lt;em>umami&lt;/em> in less than 10 minutes. You can see the umami dashboard by clicking the &lt;a href="https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli">Dashboard&lt;/a>.&lt;/p>
+&lt;h2 id="create-a-database">Create a database&lt;/h2>
+&lt;p>The database use &lt;a href="https://supabase.com/docs/guides/database">postgres&lt;/a> with 500M storage limit provided by &lt;a href="https://app.supabase.com/">supabase&lt;/a>. You can create a supabase account, click &lt;code>new project&lt;/code>, and enter the database passowrd to create an ProgresSQL database service.&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/cN3Zg4.png" alt="cN3Zg4">&lt;/p>
+&lt;p>It will take a few minutes to create the database service, and you can get the &lt;code>DATABASE_URL&lt;/code> after it&amp;rsquo;s done.&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/image-20220815182141638.png" alt="image-20220815182141638">&lt;/p>
+&lt;h2 id="hosting-umami">Hosting umami&lt;/h2>
+&lt;p>The &lt;a href="https://umami.is/">umami&lt;/a> service is hosted with &lt;a href="https://vercel.com/">vercel&lt;/a>, Once you have created the database instance, you can deploy the umami service with click deploy button in the &lt;a href="https://umami.is/docs/running-on-vercel">Running on Vercel&lt;/a> document.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Fork the &lt;a href="https://github.com/mikecao/umami">https://github.com/mikecao/umami&lt;/a> project to your GitHub account.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create an account on Vercel.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>From the dashboard page click Import Project then specify the URL to your fork of the project on GitHub.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Add the required environment variables to your Vercel project. These values are defined in the Configure umami step from Install.&lt;/p>
+&lt;ol>
+&lt;li>DATABASE_URL: Connection string for your database. This is the only required variable.&lt;/li>
+&lt;li>TRACKER_SCRIPT_NAME: Allows you to assign a custom name to the tracker script different from the default &lt;code>umami&lt;/code>. This is to help you avoid some ad-blockers. I used &lt;code>hugo-ladder&lt;/code> on this project.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>Enter &lt;code>yarn build &amp;amp;&amp;amp; yarn update-db&lt;/code> to the &lt;code>BUILD COMMAND&lt;/code>, which will migrate the tables of umami to database automatically.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Deploy and visit your application at &lt;!-- raw HTML omitted -->.vercel.app.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Follow the Getting started guide starting from the Login step and be sure to change the default password.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/gePzXI.png" alt="gePzXI">&lt;/p>
+&lt;p>Of course, if you want to import tables yourself, you can also get the tables from here &lt;a href="https://github.com/umami-software/umami/blob/master/sql/schema.postgresql.sql">https://github.com/umami-software/umami/blob/master/sql/schema.postgresql.sql&lt;/a>.&lt;/p>
+&lt;h2 id="umami-configuration">umami configuration&lt;/h2>
+&lt;p>After deploying umami in vercel you will get a &lt;code>&amp;lt;deploy-id&amp;gt;.vercel.app&lt;/code> address which login with the default account: &lt;em>admin&lt;/em> and password: &lt;em>umami&lt;/em>.&lt;/p>
+&lt;p>You can change the default password and &lt;code>Add webiste&lt;/code>, enter the &lt;code>Name&lt;/code> and &lt;code>Domain&lt;/code>, and click &lt;code>enable share URL&lt;/code> so that anyone can access the dashboard.&lt;/p>
+&lt;p>Then you can get &lt;code>data-website-id&lt;/code> and &lt;code>src&lt;/code> values by click &lt;code>Get tracking code&lt;/code>，enter the value to the &lt;code>hugo-ladder&lt;/code> configuration &lt;code>params.analytics.umami.website_id&lt;/code> , &lt;code>params.analytics.umami.url&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/OZcU7U.png" alt="OZcU7U">&lt;/p>
+&lt;p>In the end, you can get the website statistics analytics dashboard.🎉🎉🎉&lt;/p>
+&lt;p>Link to original article: &lt;a href="https://guangzhengli.com/en/blog/en/how-to-integrate-umami-for-free-to-blog-site/">https://guangzhengli.com/en/blog/en/how-to-integrate-umami-for-free-to-blog-site/&lt;/a>&lt;/p></description></item><item><title>如何零成本给博客集成 umami 数据统计分析功能</title><link>https://jonesnow.github.io/blog/zh/how-to-integrate-umami-for-free-to-blog-site/</link><pubDate>Sun, 14 Aug 2022 21:34:36 +0800</pubDate><author>iguangzhengli@gmail.com (Guangzheng Li)</author><guid>https://jonesnow.github.io/blog/zh/how-to-integrate-umami-for-free-to-blog-site/</guid><description>&lt;p>本篇文章介绍如何零成本给博客或者网站集成 &lt;a href="https://umami.is/">umami&lt;/a> 统计功能。数据库用的是 &lt;a href="https://app.supabase.com/">supabase&lt;/a> 提供的有限额的 &lt;a href="https://supabase.com/docs/guides/database">postgres&lt;/a>，不过免费提供的 500M 对于 &lt;a href="https://umami.is/">umami&lt;/a> 来讲已经足够了。&lt;/p>
+&lt;p>托管 &lt;a href="https://umami.is/">umami&lt;/a> 服务用的是 &lt;a href="https://vercel.com/">vercel&lt;/a>。得益于现在的云厂商优秀的服务能力，你可以在 10 分钟内集成好 &lt;em>umami&lt;/em>。可以点击 &lt;a href="https://umami-ochre-nu.vercel.app/share/o3zAba1V/guangzhengli">数据统计看板&lt;/a> 查看最终效果。&lt;/p>
+&lt;h2 id="创建数据库">创建数据库&lt;/h2>
+&lt;p>数据库用的是 &lt;a href="https://app.supabase.com/">supabase&lt;/a> 提供的有限额的 &lt;a href="https://supabase.com/docs/guides/database">postgres&lt;/a> 数据库，创建一个 supabase 账号，新建一个项目，输入 Datebase password 即可创建数据库服务。&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/cN3Zg4.png" alt="cN3Zg4">&lt;/p>
+&lt;p>创建可能会话费几分钟时间，创建完成后只需要拿到 &lt;code>DATABASE_URL&lt;/code> 即可。&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/image-20220815182141638.png" alt="image-20220815182141638">&lt;/p>
+&lt;h2 id="托管-umami">托管 umami&lt;/h2>
+&lt;p>托管 &lt;a href="https://umami.is/">umami&lt;/a> 服务用的是 &lt;a href="https://vercel.com/">vercel&lt;/a>。创建好数据库实例之后，可以通过 Vercel 一键部署 umami 服务了。访问 &lt;a href="https://umami.is/">umami 官方文档&lt;/a> 的 &lt;a href="https://umami.is/docs/running-on-vercel">Running on Vercel&lt;/a> 模块，有操作说明与一键部署脚本。&lt;/p>
+&lt;p>首先我们登录 GitHub 账号， &lt;code>fork&lt;/code> umami (&lt;a href="https://github.com/umami-software/umami">https://github.com/umami-software/umami&lt;/a>) 项目。&lt;/p>
+&lt;p>登录 &lt;a href="https://vercel.com/">vercel&lt;/a> ，创建一个的账号，建议使用 GitHub 账号注册登录，在 &lt;code>new project&lt;/code> 中选择 &lt;code>import&lt;/code> 你刚刚 &lt;code>fork&lt;/code> 的项目。&lt;/p>
+&lt;p>之后填写环境变量，这里我们需要填写两个环境变量&lt;/p>
+&lt;ul>
+&lt;li>DATABASE_URL：在创建数据库中拿到的 DATABASE_URL&lt;/li>
+&lt;li>TRACKER_SCRIPT_NAME： 这里默认的 &lt;code>tracker_script_name&lt;/code> 可能会导致部分 &lt;code>AdBlock&lt;/code> 拦截请求，损失一部分的访问数据，所以这里我填的是 &lt;code>hugo-ladder&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;p>最后在 Build 阶段， &lt;code>build command&lt;/code> 记得填写 &lt;code>yarn build &amp;amp;&amp;amp; yarn update-db&lt;/code>，这样的话会自动 migrate 数据库的表。无需自己手动导入。&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/gePzXI.png" alt="gePzXI">&lt;/p>
+&lt;p>当然如果你想自己导入的话，也可以直接从这里 &lt;a href="https://github.com/umami-software/umami/blob/master/sql/schema.postgresql.sql">https://github.com/umami-software/umami/blob/master/sql/schema.postgresql.sql&lt;/a> 获取需要的表。&lt;/p>
+&lt;h2 id="配置-umami">配置 umami&lt;/h2>
+&lt;p>在 vercel 部署完成 umami 后会得到一个 &lt;code>&amp;lt;deploy-id&amp;gt;.vercel.app&lt;/code> ，我们访问它，默认的账号密码是 &lt;strong>admin&lt;/strong> 和 &lt;strong>umami&lt;/strong>。&lt;/p>
+&lt;p>完成基础帐号配置后，点击侧边栏网站 Tab，点击添加网站。填写网站基本信息，可以勾选 &lt;code>enable share URL&lt;/code>，这样任何人都可以访问这个数据看板。&lt;/p>
+&lt;p>我们拿到对应的 &lt;code>data-website-id&lt;/code> 和 &lt;code>src&lt;/code> ，填入主题配置中的 &lt;code>params.analytics.umami.website_id&lt;/code> 和 &lt;code>params.analytics.umami.url&lt;/code> 即可。&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/OZcU7U.png" alt="OZcU7U">&lt;/p>
+&lt;p>最终，我们可以得到本站数据统计看板的功能🎉🎉🎉&lt;/p>
+&lt;p>原文链接: &lt;a href="https://guangzhengli.com/zh/blog/zh/how-to-integrate-umami-for-free-to-blog-site/">https://guangzhengli.com/zh/blog/zh/how-to-integrate-umami-for-free-to-blog-site/&lt;/a>&lt;/p></description></item></channel></rss>
