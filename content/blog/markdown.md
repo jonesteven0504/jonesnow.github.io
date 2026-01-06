@@ -4,7 +4,7 @@ date: 2018-07-24 23:31:06
 tags:
   - 专利
   - 技术文档
-series: 知识产权成果转化
+series: ["知识产权成果转化"]
 featured: false
 ---
 
