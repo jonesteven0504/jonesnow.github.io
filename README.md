@@ -1,6 +1,6 @@
 ## how to install
 
-Just click `Use this template` to create your blog site by 
+Just click `Use this template` to create your blog site by
 
 ![4dmtph](https://cdn.jsdelivr.net/gh/guangzhengli/PicURL@master/uPic/4dmtph.png)
 
