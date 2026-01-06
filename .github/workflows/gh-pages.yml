@@ -3,7 +3,7 @@ name: generate github pages to gh-pages branch
 on:
   push:
     branches:
-      - main # Set a branch to deploy
+      - main
 
 permissions:
   contents: write
@@ -14,8 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+          submodules: true
+          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -23,18 +23,16 @@ jobs:
           hugo-version: "latest"
           extended: true
 
-      # - name: Build
-      #   run: hugo --minify
-
-      # - name: Deploy
-      #   uses: peaceiris/actions-gh-pages@v4
-      #   if: github.ref == 'refs/heads/main'
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./public
-
       - name: Build
-        run: hugo --minify --verbose
+        run: |
+          hugo --minify --verbose
+          # 检查编译是否成功生成了文件
+          if [ -d "public" ]; then
+            ls -R public
+          else
+            echo "Error: public directory not found"
+            exit 1
+          fi
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
@@ -42,4 +40,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          force_orphan: true # 强制创建全新的 gh-pages 分支，解决分支冲突问题
+          force_orphan: true
