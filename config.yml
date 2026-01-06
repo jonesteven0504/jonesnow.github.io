@@ -1,10 +1,10 @@
-baseURL: "https://jonesteven0504.github.io/jonesnow.github.io/"
+baseURL: "https://jonesnow.github.io/"
 title: LADDER
 theme: hugo-theme-ladder
 license: MIT
 licenselink: "https://github.com/guangzhengli/hugo-theme-ladder/blob/master/LICENSE"
 description: "A platform for my personal website to share my thoughts and ideas"
-homepage: "jonesnow.github.io"
+homepage: "https://jonesnow.github.io"
 defaultContentLanguage: "zh"
 googleAnalytics: G-4WXJ5TEK2S
 paginate: 10
