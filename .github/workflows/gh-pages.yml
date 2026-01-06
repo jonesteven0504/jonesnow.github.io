@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -25,8 +26,7 @@ jobs:
 
       - name: Build
         run: |
-          hugo --minify --verbose
-          # 检查编译是否成功生成了文件
+          hugo --minify
           if [ -d "public" ]; then
             ls -R public
           else
